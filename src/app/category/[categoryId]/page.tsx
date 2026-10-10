@@ -64,7 +64,7 @@ const CategoryProductPage = () => {
   if (!data || data.length === 0) {
     return (
       <div className="container mx-auto px-4 py-20 flex flex-col items-center justify-center text-center">
-        <h2 className="text-3xl font-bold mb-2 text-base-content">৪০০ - কোনো পণ্য পাওয়া যায়নি</h2>
+        <h2 className="text-3xl font-bold mb-2 text-base-content">৪০৪ - কোনো পণ্য পাওয়া যায়নি</h2>
         <p className="text-gray-500 mb-6">
           দুঃখিত, এই ক্যাটাগরিতে বর্তমানে কোনো পণ্য উপলব্ধ নেই।
         </p>

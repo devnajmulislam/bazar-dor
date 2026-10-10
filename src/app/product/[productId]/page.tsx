@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { notFound } from "next/navigation"; // ১. notFound امপোর্ট করুন
 
 // Helper function to convert English digits to Bengali digits
 const toBengaliNumber = (num) => {
@@ -22,22 +23,14 @@ const ProductDetailPage = async ({ params }) => {
   );
   const data = await res.json();
 
-  // Handle if API returns an array or single object
+  // ২. || data[0] ফলব্যাকটি সরিয়ে ফেলুন, যাতে না পেলে undefined থাকে
   const product = Array.isArray(data)
-    ? data.find((p) => String(p.id) === String(productId)) || data[0]
+    ? data.find((p) => String(p.id) === String(productId))
     : data;
 
-  if (!product) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-base-200">
-        <div className="text-center">
-          <h2 className="text-2xl font-bold text-error">পণ্যটি পাওয়া যায়নি</h2>
-          <p className="text-base-content/60 mt-2">
-            দয়া করে সঠিক পণ্যটি খুঁজুন।
-          </p>
-        </div>
-      </div>
-    );
+  // ৩. পণ্য না থাকলে সরাসরি notFound() কল করুন
+ if (!product || !product.id || !product.today) {
+    notFound();
   }
 
   // Calculate Summary Stats from markets
@@ -55,16 +48,16 @@ const ProductDetailPage = async ({ params }) => {
   const isUp = product.change?.dir === "up";
   const isDown = product.change?.dir === "down";
   const changeColor = isUp
-    ? "text-success"
+    ? "text-error"
     : isDown
-      ? "text-error"
+      ? "text-success"
       : "text-warning";
-  const changeIcon = isUp ? "▲" : isDown ? "▼" : "•";
+  const changeIcon = isUp ? "▲" : isDown ? "▼" : "—";
 
   // Price difference description
   const diffAmount = Math.abs(product.today - product.yesterday);
   const comparisonText = isUp
-    ? `গতকালের তুলনায় আজ দাম বেড়েছে · ${toBengaliNumber(diffAmount)} টাকা`
+    ? `গতকালের তুলনায় আজ দাম বেড়েছে · ${toBengaliNumber(diffAmount)} টাকা`
     : isDown
       ? `গতকালের তুলনায় আজ দাম কমেছে · ${toBengaliNumber(diffAmount)} টাকা`
       : `গতকালের তুলনায় আজ দাম অপরিবর্তিত আছে`;
@@ -165,7 +158,7 @@ const ProductDetailPage = async ({ params }) => {
               <p className="text-xs text-base-content/60 mt-2 truncate">
                 সবচেয়ে কম দামের বাজার:{" "}
                 <span className="font-semibold text-base-content">
-                  {minMarketObj?.market || "প্রযোজ্য নয়"}
+                  {minMarketObj?.market || "প্রযোজ্য নয়"}
                 </span>
               </p>
             </div>
@@ -184,7 +177,7 @@ const ProductDetailPage = async ({ params }) => {
               <p className="text-xs text-base-content/60 mt-2 truncate">
                 সবচেয়ে বেশি দামের বাজার:{" "}
                 <span className="font-semibold text-base-content">
-                  {maxMarketObj?.market || "প্রযোজ্য নয়"}
+                  {maxMarketObj?.market || "প্রযোজ্য নয়"}
                 </span>
               </p>
             </div>

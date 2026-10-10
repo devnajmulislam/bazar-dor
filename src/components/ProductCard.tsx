@@ -84,7 +84,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       ? "bg-green-50 text-green-600"
       : "bg-gray-100 text-gray-600";
 
-  const arrowSymbol = isUp ? "▲" : isDown ? "▼" : "•";
+  const arrowSymbol = isUp ? "▲" : isDown ? "▼" : "—";
 
   return (
     <Link href={`/product/${product.id}`}>
