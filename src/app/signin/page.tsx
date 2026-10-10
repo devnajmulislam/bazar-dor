@@ -1,6 +1,7 @@
 "use client";
 
 import { authClient } from "@/lib/auth-client";
+import Link from "next/link";
 import toast from "react-hot-toast";
 
 const SignInPage = () => {
@@ -141,7 +142,7 @@ const SignInPage = () => {
         {/* Sign Up Redirect */}
         <div className="text-center mt-6 text-sm text-gray-600">
           অ্যাকাউন্ট নেই?{" "}
-          <a href="#" className="text-emerald-600 font-medium hover:underline">
+          <a href="/signup" className="text-emerald-600 font-medium hover:underline">
             সাইন আপ করুন
           </a>
         </div>
@@ -149,12 +150,12 @@ const SignInPage = () => {
 
       {/* Bottom Back Link */}
       <div className="mt-6 text-center">
-        <a
-          href="#"
+        <Link
+          href="/"
           className="text-sm text-gray-500 hover:text-gray-700 transition-colors"
         >
           ← হোম পেজে ফিরে যান
-        </a>
+        </Link>
       </div>
     </div>
   );
