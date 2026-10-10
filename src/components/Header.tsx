@@ -1,6 +1,7 @@
 import Image from "next/image";
 import NavLinks from "./NavLinks";
 import Link from "next/link";
+import UserInfo from "./UserInfo";
 
 const Header = () => {
   const date = new Date().toLocaleDateString("bn-BD", {
@@ -39,17 +40,7 @@ const Header = () => {
         </div>
 
         {/* Right Section: Auth Buttons with responsive hiding/display */}
-        <div className="flex items-center gap-2 md:gap-4">
-          {/* Sign In is typically a ghost/text button to match the image */}
-          <button className="btn btn-sm md:btn-md btn-ghost text-[#1A2E35] font-semibold">
-            সাইন ইন
-          </button>
-
-          {/* Sign Up is the primary action button */}
-          <button className="btn btn-sm md:btn-md btn-primary bg-[#009245] text-white border-none rounded-full px-5 md:px-7 font-bold hover:bg-[#007b3a]">
-            সাইন আপ
-          </button>
-        </div>
+<UserInfo/>
       </div>
       <NavLinks />
     </div>
