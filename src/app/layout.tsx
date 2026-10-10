@@ -27,7 +27,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Header/>
 
         {/* Render all pages */}
-        <div>{children}</div>
+        <main>{children}</main>
 
         {/* Footer */}
         <Footer/>

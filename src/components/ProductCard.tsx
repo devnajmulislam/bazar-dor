@@ -87,7 +87,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const arrowSymbol = isUp ? "▲" : isDown ? "▼" : "•";
 
   return (
-    <Link href={`/products/${product.id}`}>
+    <Link href={`/product/${product.id}`}>
       <div className="card bg-base-100 border border-base-200 shadow-sm hover:shadow-md transition-all rounded-3xl p-5 sm:p-6 w-full">
         {/* Top Section: Icon and Product Details */}
         <div className="flex items-center gap-4">

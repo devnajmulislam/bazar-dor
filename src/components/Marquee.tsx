@@ -1,3 +1,4 @@
+import Link from "next/link";
 import MarqueeText from "react-marquee-text";
 import "react-marquee-text/dist/styles.css";
 
@@ -16,16 +17,16 @@ interface IProduct {
 const Marquee = async () => {
   // Get data through API
   const res = await fetch(
-    "https://api.api-store.workers.dev/api/bazardor/products",
+    "https://api.abcz.workers.dev/api/bazardor/products",
     {
       cache: "no-store",
-    }
+    },
   );
-  
+
   if (!res.ok) {
     throw new Error("Failed to fetch products");
   }
-  
+
   const data: IProduct[] = await res.json();
 
   // convert numbers to Bengali digits with comma separation (e.g., ১,৮৫০)
@@ -52,10 +53,10 @@ const Marquee = async () => {
     // parent container
     <div className="bg-base-100 border-b border-base-200 overflow-hidden shadow-sm">
       <div className="container mx-auto">
-        <MarqueeText 
-          direction="right" 
+        <MarqueeText
+          direction="right"
           duration={35}
-          className="py-2" 
+          className="py-2"
           pauseOnHover={true}
         >
           <div className="flex items-center gap-3">
@@ -66,47 +67,56 @@ const Marquee = async () => {
               let Arrow = "—";
 
               if (dir === "up") {
-                changeColor = "text-success";
+                changeColor = "text-error";
                 Arrow = "▲";
               } else if (dir === "down") {
-                changeColor = "text-error";
+                changeColor = "text-success";
                 Arrow = "▼";
               }
 
               return (
-                <div
-                  key={product.id}
-                  className="flex items-center gap-2 px-4 py-1 border-r border-base-200 whitespace-nowrap text-sm sm:text-base"
-                >
-                  {/* Category Emoji Icon */}
-                  <span className="text-lg select-none">
-                    {product.categoryIcon}
-                  </span>
+                <>
+                  <Link href={`/product/${product.id}`}>
+                    <div
+                      key={product.id}
+                      className="flex items-center gap-2 px-4 py-1 border-r border-base-200 whitespace-nowrap text-sm sm:text-base"
+                    >
+                      {/* Category Emoji Icon */}
+                      <span className="text-lg select-none">
+                        {product.categoryIcon}
+                      </span>
 
-                  {/* Product Name (Bangla) */}
-                  <span className="font-semibold text-base-content">
-                    {product.nameBn}
-                  </span>
+                      {/* Product Name (Bangla) */}
+                      <span className="font-semibold text-base-content">
+                        {product.nameBn}
+                      </span>
 
-                  {/* Price & Unit Display (e.g. ১৪৮ টাকা/কেজি) */}
-                  <div className="flex items-center gap-1 text-base-content/80 font-medium">
-                    <span className="font-bold text-base-content">
-                      {toBengaliNumber(product.today)}
-                    </span>
-                    <span className="text-xs opacity-75">টাকা/</span>
-                    <span className="text-xs opacity-75">
-                      {translateUnitToBengali(product.unit)}
-                    </span>
-                  </div>
+                      {/* Price & Unit Display (e.g. ১৪৮ টাকা/কেজি) */}
+                      <div className="flex items-center gap-1 text-base-content/80 font-medium">
+                        <span className="font-bold text-base-content">
+                          {toBengaliNumber(product.today)}
+                        </span>
+                        <span className="text-xs opacity-75">টাকা/</span>
+                        <span className="text-xs opacity-75">
+                          {translateUnitToBengali(product.unit)}
+                        </span>
+                      </div>
 
-                  {/* Change Percentage Badge */}
-                  <div className={`flex items-center gap-0.5 font-bold text-xs sm:text-sm px-1.5 py-0.5 rounded bg-base-200/50 ${changeColor}`}>
-                    <span>{Arrow}</span>
-                    <span>
-                      {toBengaliNumber(Math.abs(product.change.pct).toFixed(1))}%
-                    </span>
-                  </div>
-                </div>
+                      {/* Change Percentage Badge */}
+                      <div
+                        className={`flex items-center gap-0.5 font-bold text-xs sm:text-sm px-1.5 py-0.5 rounded bg-base-200/50 ${changeColor}`}
+                      >
+                        <span>{Arrow}</span>
+                        <span>
+                          {toBengaliNumber(
+                            Math.abs(product.change.pct).toFixed(1),
+                          )}
+                          %
+                        </span>
+                      </div>
+                    </div>
+                  </Link>
+                </>
               );
             })}
           </div>

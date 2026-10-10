@@ -4,7 +4,7 @@ import ProductCard from "@/components/ProductCard";
 
 export default async function Home() {
   const res = await fetch(
-    "https://api.api-store.workers.dev/api/bazardor/products",
+    "https://api.abcz.workers.dev/api/bazardor/products",
   );
   const data = await res.json();
   // console.log(data, 'from home page')
