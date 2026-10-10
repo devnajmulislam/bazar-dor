@@ -31,7 +31,7 @@ interface ProductCardProps {
   product: IProduct;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+const ProductCard = ({ product }: ProductCardProps) => {
   // Helper to translate units into Bengali
   const getUnitNameBn = (unit: string) => {
     switch (unit) {

@@ -1,6 +1,7 @@
 import Banner from "@/components/Banner";
 import Marquee from "@/components/Marquee";
 import ProductCard from "@/components/ProductCard";
+import { Product } from "@/types/product";
 
 export default async function Home() {
   const res = await fetch(
@@ -29,9 +30,7 @@ export default async function Home() {
         <h2 className="text-3xl">▲ আজ দাম বেড়েছে</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {topRisers.map((tp) => (
-            <ProductCard product={tp} key={tp.id}>
-              {" "}
-            </ProductCard>
+            <ProductCard product={tp} key={tp.id} />
           ))}
         </div>
       </div>
@@ -51,7 +50,7 @@ export default async function Home() {
         <p>মোট {data.length} টি পণ্য দেখানো হচ্ছে</p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {" "}
-          {data.map((p) => (
+          {data.map((p:Product) => (
             <ProductCard product={p} key={p.id}></ProductCard>
           ))}
         </div>

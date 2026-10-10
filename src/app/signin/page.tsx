@@ -3,11 +3,12 @@
 import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
 import toast from "react-hot-toast";
+import React from "react";
 
 const SignInPage = () => {
-  const onSubmit = async (e) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const fromData = new FormData(e.target);
+    const fromData = new FormData(e.currentTarget);
     const user = Object.fromEntries(fromData.entries()) as {
       email: string;
       password: string;
@@ -19,18 +20,18 @@ const SignInPage = () => {
     });
 
     if (data) {
-      toast.success("Sign In successfull!");
+      toast.success("Sign In successful!");
       console.log(data);
     }
 
     if (error) {
-      toast.error(error.message);
+      toast.error(error.message || "Something went wrong during sign in");
       console.log(error);
     }
   };
 
   const handleGoogleSignIn = async () => {
-   await authClient.signIn.social({
+    await authClient.signIn.social({
       provider: "google",
     });
   };
@@ -56,7 +57,6 @@ const SignInPage = () => {
       {/* Card Container */}
       <div className="w-full max-w-md bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sm:p-8">
         <form onSubmit={onSubmit} className="space-y-4 sm:space-y-5">
-          {/* onSubmit={(e) => e.preventDefault()} */}
           {/* Email Field */}
           <div className="form-control">
             <label className="label">
@@ -103,6 +103,7 @@ const SignInPage = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {/* Google Button */}
           <button
+            type="button"
             onClick={handleGoogleSignIn}
             className="btn btn-outline border-gray-300 bg-white hover:bg-gray-50 text-gray-700 font-normal normal-case w-full flex items-center justify-center gap-2 shadow-sm"
           >
@@ -129,6 +130,7 @@ const SignInPage = () => {
 
           {/* GitHub Button */}
           <button
+            type="button"
             onClick={handleGitHubSignIn}
             className="btn btn-outline border-gray-300 bg-white hover:bg-gray-50 text-gray-700 font-normal normal-case w-full flex items-center justify-center gap-2 shadow-sm"
           >

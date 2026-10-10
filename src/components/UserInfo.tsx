@@ -7,7 +7,9 @@ import toast from "react-hot-toast";
 
 const UserInfo = () => {
   const { data: session } = authClient.useSession();
-  const user = session?.user;
+  // Cast user as any to safely support both Better Auth fields (name, image) 
+  // and legacy/fallback fields (displayName, photoURL) without TypeScript errors.
+  const user = session?.user as any;
 
   const handleSignOut = async () => {
     toast.error("Sign Out successfull!");

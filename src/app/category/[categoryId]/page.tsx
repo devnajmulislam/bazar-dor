@@ -4,12 +4,13 @@ import ProductCard from "@/components/ProductCard";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
+import { Product } from "@/types/product"; // Import centralized Product interface
 
 const CategoryProductPage = () => {
   const params = useParams();
   const categoryId = params?.categoryId;
 
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<Product[]>([]); // Typed state
   const [loading, setLoading] = useState(true);
   const [sortOrder, setSortOrder] = useState("default");
 
@@ -37,13 +38,16 @@ const CategoryProductPage = () => {
   }, [categoryId]);
 
   // Price parser function for Bengali/English digits and text
-  const parsePrice = (priceValue) => {
+  const parsePrice = (priceValue: string | number) => {
     if (!priceValue) return 0;
     const str = String(priceValue);
     
-    // Convert Bengali digits to English digits
-    const bengaliDigits = { '০': '0', '১': '1', '২': '2', '৩': '3', '৪': '4', '৫': '5', '৬': '6', '৭': '7', '৮': '8', '৯': '9' };
-    const converted = str.replace(/[০-৯]/g, (match) => bengaliDigits[match]);
+    // Convert Bengali digits to English digits with proper record typing
+    const bengaliDigits: Record<string, string> = { 
+      '০': '0', '১': '1', '২': '2', '৩': '3', '৪': '4', 
+      '৫': '5', '৬': '6', '৭': '7', '৮': '8', '৯': '9' 
+    };
+    const converted = str.replace(/[০-৯]/g, (match) => bengaliDigits[match] || match);
     
     // Extract numbers (including decimals)
     const match = converted.match(/[\d.]+/);
@@ -76,7 +80,7 @@ const CategoryProductPage = () => {
   }
 
   // Sorting logic using parsePrice
-let sortedData = [...data];
+  let sortedData = [...data];
   if (sortOrder === "low-to-high") {
     sortedData.sort((a, b) => parsePrice(a.today) - parsePrice(b.today));
   } else if (sortOrder === "high-to-low") {
@@ -84,7 +88,7 @@ let sortedData = [...data];
   }
 
   // Dynamic category name and icon
-const categoryTitle = data[0]?.categoryNameBn || "চাল";
+  const categoryTitle = data[0]?.categoryNameBn || "চাল";
   const categoryIcon = data[0]?.categoryIcon || "🍚";
 
   return (

@@ -8,22 +8,22 @@ const ProfilePage = () => {
   const { data: session } = authClient.useSession();
   const user = session?.user;
 
-  const handleUpdateProfile = async(e) => {
-e.preventDefault()
-const formData = new FormData(e.target);
-const newUserData = Object.fromEntries(formData.entries()) as {name:string, image:string}
+  const handleUpdateProfile = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const newUserData = Object.fromEntries(formData.entries()) as { name: string; image: string };
 
-toast.success("Name update successfull!");
+    toast.success("Name update successfull!");
 
-await authClient.updateUser({
-    ...newUserData
-})
-  }
+    await authClient.updateUser({
+      ...newUserData,
+    });
+  };
 
-    const handleSignOut = async () => {
-      toast.error("Sign Out successfull!");
-      await authClient.signOut();
-    };
+  const handleSignOut = async () => {
+    toast.error("Sign Out successfull!");
+    await authClient.signOut();
+  };
 
   return (
     <div className="min-h-screen bg-base-200 py-8 px-4 sm:px-6 lg:px-8">
@@ -43,19 +43,24 @@ await authClient.updateUser({
           <div className="card-body p-4 sm:p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
               <div className="avatar">
-                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden shadow-sm">
-                  <Image
-                    src={user?.image || user?.photoURL}
-                    alt={user?.name || user?.displayName || "User"}
-                    width={56}
-                    height={56}
-                    className="w-full h-full object-cover"
-                  />
+                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden shadow-sm relative">
+                  {user?.image ? (
+                    <Image
+                      src={user.image}
+                      alt={user?.name || "User"}
+                      fill
+                      className="object-cover"
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-neutral/20 flex items-center justify-center text-neutral font-bold text-xl">
+                      {user?.name?.charAt(0) || "U"}
+                    </div>
+                  )}
                 </div>
               </div>
               <div>
                 <h2 className="text-xl sm:text-2xl font-bold text-neutral">
-                  {user?.name || user?.displayName  || ""}
+                  {user?.name || "User"}
                 </h2>
                 <p className="text-sm sm:text-base text-neutral/60">
                   {user?.email || ""}
@@ -91,7 +96,7 @@ await authClient.updateUser({
               তথ্য
             </h3>
 
-            <form  onSubmit={handleUpdateProfile} className="space-y-6">
+            <form onSubmit={handleUpdateProfile} className="space-y-6">
               <div className="form-control w-full">
                 <label className="label">
                   <span className="label-text text-neutral font-medium">
@@ -99,10 +104,11 @@ await authClient.updateUser({
                   </span>
                 </label>
                 <input
-                name="name"
+                  name="name"
                   type="text"
+                  defaultValue={user?.name || ""}
                   placeholder="আপনার নাম লিখুন"
-                  className="input input-bordered w-xl bg-base-100 focus:outline-none"
+                  className="input input-bordered w-full bg-base-100 focus:outline-none"
                 />
               </div>
 
