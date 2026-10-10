@@ -1,9 +1,64 @@
 import Banner from "@/components/Banner";
 import Marquee from "@/components/Marquee";
+import ProductCard from "@/components/ProductCard";
 
-export default function Home() {
-  return <div>
-    <Marquee/>
-    <Banner/>
-    চাল, ডাল, তেল, সবজি, মাছ, মাংস, ডিম ও মসলার দাম — বাজারভিত্তিক বিস্তারিত, গড়, সর্বনিম্ন-সর্বাধিক এবং দামের পরিবর্তন এক জায়গায়।</div>;
+export default async function Home() {
+  const res = await fetch(
+    "https://api.api-store.workers.dev/api/bazardor/products",
+  );
+  const data = await res.json();
+  // console.log(data, 'from home page')
+
+  // Top 6 Risers
+  const topRisers = [...data]
+    .filter((item) => item.change.dir === "up")
+    .sort((a, b) => b.change.pct - a.change.pct)
+    .slice(0, 6);
+
+  //Top 6 Fallers
+  const topFallers = [...data]
+    .filter((item) => item.change.dir === "down")
+    .sort((a, b) => a.change.pct - b.change.pct)
+    .slice(0, 6);
+
+  console.log(topRisers, "risers");
+  // console.log(topFallers, 'fallers')
+  return (
+    <div>
+      <Marquee />
+      <Banner />
+      {/* aj dam bere se top 6 */}
+      <div className="container mx-auto">
+        <h2 className="text-3xl">▲ আজ দাম বেড়েছে</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {topRisers.map((tp) => (
+            <ProductCard product={tp} key={tp.id}>
+              {" "}
+            </ProductCard>
+          ))}
+        </div>
+      </div>
+      {/* aj dam kome se top 6 */}
+      <div className="container mx-auto">
+        <h2 className="text-3xl">▼ আজ দাম কমেছে</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {" "}
+          {topFallers.map((fp) => (
+            <ProductCard product={fp} key={fp.id}></ProductCard>
+          ))}
+        </div>
+      </div>
+      {/* sob ponno */}
+      <div className="container mx-auto">
+        <h1 className="text-3xl">সব পণ্য</h1>
+        <p>মোট {data.length} টি পণ্য দেখানো হচ্ছে</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {" "}
+          {data.map((p) => (
+            <ProductCard product={p} key={p.id}></ProductCard>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
 }
