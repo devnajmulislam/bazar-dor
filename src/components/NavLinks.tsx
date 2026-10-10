@@ -9,9 +9,10 @@ interface ICategoryType {
 
 const NavLinks = async () => {
   const res = await fetch(
-    "https://api.abcz.workers.dev/api/bazardor/categories",
+    "https://openapi.programming-hero.com/api/bazardor/categories",
   );
   const data: ICategoryType[] = await res.json();
+
 
   return (
     <nav className=" container mx-auto bg-[#fcfcfc] border-gray-100">

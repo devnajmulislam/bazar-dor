@@ -8,10 +8,9 @@ import toast from "react-hot-toast";
 const UserInfo = () => {
   const { data: session } = authClient.useSession();
   const user = session?.user;
-    console.log(user, "from userinfo page");
 
   const handleSignOut = async () => {
-   toast.error("Sign Out successfull!")
+    toast.error("Sign Out successfull!");
     await authClient.signOut();
   };
 
@@ -31,9 +30,9 @@ const UserInfo = () => {
                   <Image
                     src={user?.image || user?.photoURL}
                     alt={user?.name || user?.displayName || "User"}
-                    fill
-                    sizes="(max-width: 768px) 48px, 56px"
-                    className="object-cover"
+                    width={56}
+                    height={56}
+                    className="w-full h-full object-cover"
                   />
                 ) : (
                   <span className="text-xl md:text-2xl font-extrabold text-[#009245]">

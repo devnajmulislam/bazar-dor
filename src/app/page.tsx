@@ -4,10 +4,9 @@ import ProductCard from "@/components/ProductCard";
 
 export default async function Home() {
   const res = await fetch(
-    "https://api.abcz.workers.dev/api/bazardor/products",
+    "https://openapi.programming-hero.com/api/bazardor/products",
   );
   const data = await res.json();
-  // console.log(data, 'from home page')
 
   // Top 6 Risers
   const topRisers = [...data]
@@ -21,8 +20,6 @@ export default async function Home() {
     .sort((a, b) => a.change.pct - b.change.pct)
     .slice(0, 6);
 
-  console.log(topRisers, "risers");
-  // console.log(topFallers, 'fallers')
   return (
     <div>
       <Marquee />

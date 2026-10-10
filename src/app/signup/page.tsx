@@ -31,10 +31,16 @@ const SignUpPage = () => {
   };
 
 const handleGoogleSignIn = async() => {
-      const data = await authClient.signIn.social({
+      await authClient.signIn.social({
     provider: "google",
   });
 } 
+
+  const handleGitHubSignIn = async () => {
+    await authClient.signIn.social({
+      provider: "github",
+    });
+  };
 
   return (
     <div className="min-h-screen bg-base-200 flex flex-col justify-center items-center py-10 px-4 sm:px-6 lg:px-8">
@@ -152,7 +158,7 @@ const handleGoogleSignIn = async() => {
             </button>
 
             {/* GitHub Button */}
-            <button className="btn btn-outline btn-block sm:flex-1 normal-case border-base-300 hover:bg-base-100 hover:text-base-content text-xs sm:text-sm">
+            <button onClick={handleGitHubSignIn} className="btn btn-outline btn-block sm:flex-1 normal-case border-base-300 hover:bg-base-100 hover:text-base-content text-xs sm:text-sm">
               <svg
                 className="w-4 h-4 mr-1.5"
                 fill="currentColor"

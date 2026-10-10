@@ -40,7 +40,7 @@ const Header = () => {
         </div>
 
         {/* Right Section: Auth Buttons with responsive hiding/display */}
-<UserInfo/>
+        <UserInfo />
       </div>
       <NavLinks />
     </div>
