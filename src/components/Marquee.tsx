@@ -1,46 +1,119 @@
 import MarqueeText from "react-marquee-text";
 import "react-marquee-text/dist/styles.css";
 
-interface IMarqueeType {
+interface IProduct {
   id: number;
   nameBn: string;
   categoryIcon: string;
   unit: string;
   today: number;
   change: {
-    dir: string;
+    dir: string; // "up", "down", or "flat"
     pct: number;
   };
 }
 
 const Marquee = async () => {
+  // Get data through API
   const res = await fetch(
     "https://api.api-store.workers.dev/api/bazardor/products",
+    {
+      cache: "no-store",
+    }
   );
-  const data = await res.json();
+  
+  if (!res.ok) {
+    throw new Error("Failed to fetch products");
+  }
+  
+  const data: IProduct[] = await res.json();
 
-  console.log(data, "from Marquee file");
+  // convert numbers to Bengali digits with comma separation (e.g., ১,৮৫০)
+  const toBengaliNumber = (num: number | string): string => {
+    if (num === undefined || num === null) return "";
+    return Number(num).toLocaleString("bn-BD");
+  };
+
+  //translate units into Bengali
+  const translateUnitToBengali = (unit: string): string => {
+    const unitMap: Record<string, string> = {
+      kg: "কেজি",
+      g: "গ্রাম",
+      litre: "লিটার",
+      ltr: "লিটার",
+      pcs: "পিস",
+      pc: "পিস",
+      packet: "প্যাকেট",
+    };
+    return unitMap[unit.toLowerCase()] || unit;
+  };
 
   return (
-<div className="container mx-autoF">
-      <MarqueeText direction="right" duration={10}>
-      <div>
-        {data.map((p:IMarqueeType) => (
-          <span key={p.id}>
-            <span>{p.categoryIcon}</span>
-            <span>{p.nameBn}</span>
-            <span>{p.today}</span>
-            <span>tk</span>
-            <span>{p.unit}</span>
-            <span>{p?.change?.dir}</span>
-            <span>{p?.change?.pct}</span>
-          </span>
-        ))}
+    // parent container
+    <div className="bg-base-100 border-b border-base-200 overflow-hidden shadow-sm">
+      <div className="container mx-auto">
+        <MarqueeText 
+          direction="right" 
+          duration={35}
+          className="py-2" 
+          pauseOnHover={true}
+        >
+          <div className="flex items-center gap-3">
+            {data.map((product) => {
+              // Color logic: green up, red down, gray flat
+              const dir = product.change.dir;
+              let changeColor = "text-base-content/60";
+              let Arrow = "—";
+
+              if (dir === "up") {
+                changeColor = "text-success";
+                Arrow = "▲";
+              } else if (dir === "down") {
+                changeColor = "text-error";
+                Arrow = "▼";
+              }
+
+              return (
+                <div
+                  key={product.id}
+                  className="flex items-center gap-2 px-4 py-1 border-r border-base-200 whitespace-nowrap text-sm sm:text-base"
+                >
+                  {/* Category Emoji Icon */}
+                  <span className="text-lg select-none">
+                    {product.categoryIcon}
+                  </span>
+
+                  {/* Product Name (Bangla) */}
+                  <span className="font-semibold text-base-content">
+                    {product.nameBn}
+                  </span>
+
+                  {/* Price & Unit Display (e.g. ১৪৮ টাকা/কেজি) */}
+                  <div className="flex items-center gap-1 text-base-content/80 font-medium">
+                    <span className="font-bold text-base-content">
+                      {toBengaliNumber(product.today)}
+                    </span>
+                    <span className="text-xs opacity-75">টাকা/</span>
+                    <span className="text-xs opacity-75">
+                      {translateUnitToBengali(product.unit)}
+                    </span>
+                  </div>
+
+                  {/* Change Percentage Badge */}
+                  <div className={`flex items-center gap-0.5 font-bold text-xs sm:text-sm px-1.5 py-0.5 rounded bg-base-200/50 ${changeColor}`}>
+                    <span>{Arrow}</span>
+                    <span>
+                      {toBengaliNumber(Math.abs(product.change.pct).toFixed(1))}%
+                    </span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </MarqueeText>
       </div>
-    </MarqueeText>
-</div>
+    </div>
   );
 };
 
 export default Marquee;
-
