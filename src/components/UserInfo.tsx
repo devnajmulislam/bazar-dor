@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 const UserInfo = () => {
   const { data: session } = authClient.useSession();
   const user = session?.user;
-  //   console.log(user, "from userinfo page");
+    console.log(user, "from userinfo page");
 
   const handleSignOut = async () => {
    toast.error("Sign Out successfull!")

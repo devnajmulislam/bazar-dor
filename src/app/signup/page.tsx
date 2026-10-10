@@ -30,6 +30,12 @@ const SignUpPage = () => {
     }
   };
 
+const handleGoogleSignIn = async() => {
+      const data = await authClient.signIn.social({
+    provider: "google",
+  });
+} 
+
   return (
     <div className="min-h-screen bg-base-200 flex flex-col justify-center items-center py-10 px-4 sm:px-6 lg:px-8">
       {/* Top Header */}
@@ -123,7 +129,7 @@ const SignUpPage = () => {
           {/* Social Buttons (Responsive stack on mobile, side-by-side on larger screens) */}
           <div className="flex flex-col sm:flex-row gap-3">
             {/* Google Button */}
-            <button className="btn btn-outline btn-block sm:flex-1 normal-case border-base-300 hover:bg-base-100 hover:text-base-content text-xs sm:text-sm">
+            <button onClick={handleGoogleSignIn}  className="btn btn-outline btn-block sm:flex-1 normal-case border-base-300 hover:bg-base-100 hover:text-base-content text-xs sm:text-sm">
               <svg className="w-4 h-4 mr-1.5" viewBox="0 0 24 24">
                 <path
                   fill="#4285F4"
