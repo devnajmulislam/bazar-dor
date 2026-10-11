@@ -15,43 +15,52 @@ export default async function Home() {
     .sort((a, b) => b.change.pct - a.change.pct)
     .slice(0, 6);
 
-  //Top 6 Fallers
+  // Top 6 Fallers
   const topFallers = [...data]
     .filter((item) => item.change.dir === "down")
     .sort((a, b) => a.change.pct - b.change.pct)
     .slice(0, 6);
 
   return (
-    <div>
+    <div className="space-y-10 md:space-y-14 pb-16">
       <Marquee />
       <Banner />
-      {/* aj dam bere se top 6 */}
-      <div className="container mx-auto">
-        <h2 className="text-3xl">▲ আজ দাম বেড়েছে</h2>
+
+      {/* আজ দাম বেড়েছে - Top 6 Risers */}
+      <div className="container mx-auto px-4">
+        <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 flex items-center gap-2">
+          <span className="text-[#D03739]">▲</span> আজ দাম বেড়েছে
+        </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {topRisers.map((tp) => (
             <ProductCard product={tp} key={tp.id} />
           ))}
         </div>
       </div>
-      {/* aj dam kome se top 6 */}
-      <div className="container mx-auto">
-        <h2 className="text-3xl">▼ আজ দাম কমেছে</h2>
+
+      {/* আজ দাম কমেছে - Top 6 Fallers */}
+      <div className="container mx-auto px-4">
+        <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 flex items-center gap-2">
+          <span className="text-[#009245]">▼</span> আজ দাম কমেছে
+        </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {" "}
           {topFallers.map((fp) => (
-            <ProductCard product={fp} key={fp.id}></ProductCard>
+            <ProductCard product={fp} key={fp.id} />
           ))}
         </div>
       </div>
-      {/* sob ponno */}
-      <div className="container mx-auto" id="সব-পণ্য">
-        <h1 className="text-3xl">সব পণ্য</h1>
-        <p>মোট {data.length} টি পণ্য দেখানো হচ্ছে</p>
+
+      {/* সব পণ্য - All Products */}
+      <div className="container mx-auto px-4" id="সব-পণ্য">
+        <div className="mb-4 md:mb-6">
+          <h2 className="text-xl md:text-2xl font-bold">সব পণ্য</h2>
+          <p className="text-sm text-gray-500 mt-1">
+            মোট {data.length} টি পণ্য দেখানো হচ্ছে
+          </p>
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {" "}
-          {data.map((p:Product) => (
-            <ProductCard product={p} key={p.id}></ProductCard>
+          {data.map((p: Product) => (
+            <ProductCard product={p} key={p.id} />
           ))}
         </div>
       </div>

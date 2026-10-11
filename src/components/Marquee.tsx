@@ -67,10 +67,10 @@ const Marquee = async () => {
               let Arrow = "—";
 
               if (dir === "up") {
-                changeColor = "text-error";
+                changeColor = "text-[#D03739]";
                 Arrow = "▲";
               } else if (dir === "down") {
-                changeColor = "text-success";
+                changeColor = "text-[#009245]";
                 Arrow = "▼";
               }
 
