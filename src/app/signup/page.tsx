@@ -44,7 +44,7 @@ const SignUpPage = () => {
 
   return (
     <div className="min-h-screen bg-base-200 flex flex-col justify-center items-center py-10 px-4 sm:px-6 lg:px-8">
-      {/* Top Header */}
+      {/* Top header */}
       <div className="text-center mb-6">
         <h1 className="text-2xl sm:text-3xl font-bold text-base-content mb-1">
           অকাউন্ট তৈরি করুন
@@ -54,11 +54,11 @@ const SignUpPage = () => {
         </p>
       </div>
 
-      {/* Form Card Container */}
+      {/* Form card container */}
       <div className="card w-full max-w-md bg-white shadow-xl border border-base-200">
         <div className="card-body p-6 sm:p-8">
           <form onSubmit={onSubmit} className="space-y-4">
-            {/* Name Field */}
+            {/* Name field */}
             <div>
               <label className="label">
                 <span className="label-text font-medium text-base-content text-sm">
@@ -68,12 +68,12 @@ const SignUpPage = () => {
               <input
                 name="name"
                 type="text"
-                placeholder="যেমন: রহিম উদ্দিন"
+                placeholder="Najmul Islam Nahid"
                 className="input input-bordered w-full bg-base-100 text-sm focus:outline-none focus:ring-2 focus:ring-success"
               />
             </div>
 
-            {/* Email Field */}
+            {/* Email field */}
             <div>
               <label className="label">
                 <span className="label-text font-medium text-base-content text-sm">
@@ -83,12 +83,12 @@ const SignUpPage = () => {
               <input
                 name="email"
                 type="email"
-                placeholder="you@example.com"
+                placeholder="nahid@gmail.com"
                 className="input input-bordered w-full bg-base-100 text-sm focus:outline-none focus:ring-2 focus:ring-success"
               />
             </div>
 
-            {/* Password Field */}
+            {/* Password field */}
             <div>
               <label className="label">
                 <span className="label-text font-medium text-base-content text-sm">
@@ -98,26 +98,12 @@ const SignUpPage = () => {
               <input
                 name="password"
                 type="password"
-                placeholder="কমপক্ষে ৮ অক্ষর"
+                placeholder="Minimum 8 characters"
                 className="input input-bordered w-full bg-base-100 text-sm focus:outline-none focus:ring-2 focus:ring-success"
               />
             </div>
 
-            {/* Confirm Password Field */}
-            <div>
-              <label className="label">
-                <span className="label-text font-medium text-base-content text-sm">
-                  পাসওয়ার্ড নিশ্চিত করুন
-                </span>
-              </label>
-              <input
-                type="password"
-                placeholder="আবার লিখুন"
-                className="input input-bordered w-full bg-base-100 text-sm focus:outline-none focus:ring-2 focus:ring-success"
-              />
-            </div>
-
-            {/* Submit Button */}
+            {/* Submit button */}
             <div className="pt-2">
               <button
                 type="submit"
@@ -131,9 +117,9 @@ const SignUpPage = () => {
           {/* Divider */}
           <div className="divider text-xs text-gray-400 my-4">অথবা</div>
 
-          {/* Social Buttons */}
+          {/* Social buttons */}
           <div className="flex flex-col sm:flex-row gap-3">
-            {/* Google Button */}
+            {/* Google button */}
             <button
               onClick={handleGoogleSignIn}
               className="btn btn-outline btn-block sm:flex-1 normal-case border-base-300 hover:bg-base-100 hover:text-base-content text-xs sm:text-sm"
@@ -159,7 +145,7 @@ const SignUpPage = () => {
               দিয়ে চালিয়ে যান
             </button>
 
-            {/* GitHub Button */}
+            {/* GitHub button */}
             <button
               onClick={handleGitHubSignIn}
               className="btn btn-outline btn-block sm:flex-1 normal-case border-base-300 hover:bg-base-100 hover:text-base-content text-xs sm:text-sm"
@@ -192,7 +178,7 @@ const SignUpPage = () => {
         </div>
       </div>
 
-      {/* Bottom Footer Link */}
+      {/* Bottom footer link */}
       <div className="mt-6 text-center">
         <Link
           href="/"

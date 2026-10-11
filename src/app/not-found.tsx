@@ -5,12 +5,12 @@ const NotFoundPage = () => {
   return (
     <div className="min-h-[70vh] flex items-center justify-center container mx-auto px-4 py-12">
       <div className="w-full text-center space-y-6 bg-white p-8 md:p-10 rounded-2xl border border-gray-100 shadow-sm">
-        {/* 404 Visual Icon Badge */}
+        {/* 404 icon */}
         <div className="relative mx-auto w-24 h-24 flex items-center justify-center bg-red-50 text-[#D03739] rounded-full">
           <span className="text-4xl font-extrabold">404</span>
         </div>
 
-        {/* Text Content in Bengali */}
+        {/* Text content*/}
         <div className="space-y-2">
           <h1 className="text-2xl md:text-3xl font-bold text-gray-800">
             পৃষ্ঠাটি পাওয়া যায়নি!
@@ -20,7 +20,7 @@ const NotFoundPage = () => {
           </p>
         </div>
 
-        {/* Action Button */}
+        {/* Button */}
         <div className="pt-2">
           <Link
             href="/"

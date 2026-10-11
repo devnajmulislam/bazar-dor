@@ -1,5 +1,4 @@
 import Link from "next/link";
-import React from "react";
 
 // Interface for the product prop
 interface IProduct {
@@ -73,11 +72,11 @@ const ProductCard = ({ product }: ProductCardProps) => {
 
   const { dir, pct } = product.change;
 
-  // Styling configurations based on price direction (up/down/flat)
+  // Styling configurations (up/down/flat)
   const isUp = dir === "up";
   const isDown = dir === "down";
 
-  // Badge background and text colors matching the soft pill aesthetic
+  // Badge background and text colors
   const badgeColor = isUp
     ? "bg-red-50 text-red-600"
     : isDown
@@ -89,14 +88,14 @@ const ProductCard = ({ product }: ProductCardProps) => {
   return (
     <Link href={`/product/${product.id}`}>
       <div className="card bg-base-100 border border-base-200 shadow-sm hover:shadow-md transition-all rounded-3xl p-5 sm:p-6 w-full">
-        {/* Top Section: Icon and Product Details */}
+        {/* Top section: icon and product details */}
         <div className="flex items-center gap-4">
-          {/* Product Icon / Image Box */}
+          {/* Product icon */}
           <div className="w-16 h-16 sm:w-20 sm:h-20 bg-base-200/50 rounded-2xl flex items-center justify-center text-3xl sm:text-4xl shrink-0">
             {product.image}
           </div>
 
-          {/* Product Name & Unit */}
+          {/* Product name & unit */}
           <div className="flex flex-col justify-center">
             <h2 className="text-xl sm:text-2xl font-bold text-neutral tracking-tight">
               {product.nameBn}
@@ -107,7 +106,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
           </div>
         </div>
 
-        {/* Bottom Section: Pricing & Percentage Change Badge */}
+        {/* Bottom Section - pricing & percentage change badge */}
         <div className="mt-6 flex items-end justify-between">
           <div>
             <p className="text-xs sm:text-sm text-gray-500 font-medium">
@@ -121,7 +120,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
             </div>
           </div>
 
-          {/* Percentage Change Pill Badge */}
+          {/* Percentage change badge */}
           <div
             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs sm:text-sm font-bold ${badgeColor}`}
           >

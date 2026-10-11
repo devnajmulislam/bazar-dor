@@ -6,11 +6,11 @@ import Link from "next/link";
 import toast from "react-hot-toast";
 
 const UserInfo = () => {
+  // get signed user session
   const { data: session } = authClient.useSession();
-  // Cast user as any to safely support both Better Auth fields (name, image) 
-  // and legacy/fallback fields (displayName, photoURL) without TypeScript errors.
-  const user = session?.user as any;
 
+  const user = session?.user as any;
+// signout handler
   const handleSignOut = async () => {
     toast.error("Sign Out successfull!");
     await authClient.signOut();
@@ -26,7 +26,7 @@ const UserInfo = () => {
               role="button"
               className="flex items-center gap-2 md:gap-3 cursor-pointer group p-1.5 rounded-2xl hover:bg-base-200 transition-all duration-200"
             >
-              {/* Avatar Box with Image or First Letter Fallback */}
+              {/* Image*/}
               <div className="w-12 h-12 md:w-14 md:h-14 rounded-2xl overflow-hidden bg-emerald-100 shadow-sm flex items-center justify-center border border-base-300">
                 {user?.image || user?.photoURL ? (
                   <Image
@@ -45,7 +45,7 @@ const UserInfo = () => {
                 )}
               </div>
 
-              {/* Name & Dropdown Arrow */}
+              {/* Name & dropdown arrow */}
               <div className="flex items-center gap-2">
                 <span className="text-xl md:text-2xl font-bold tracking-tight text-zinc-800">
                   {user?.name || user?.displayName}
@@ -61,12 +61,12 @@ const UserInfo = () => {
               </div>
             </div>
 
-            {/* Dropdown Menu Content matching the image */}
+            {/* Dropdown menu content */}
             <ul
               tabIndex={0}
               className="dropdown-content z-[1] menu p-3 shadow-xl bg-base-100 rounded-3xl w-72 mt-3 border border-base-200"
             >
-              {/* User Details Header */}
+              {/* User details header */}
               <div className="px-3 py-2 border-b border-base-200 mb-2">
                 <p className="font-bold text-lg text-zinc-900 truncate">
                   {user?.name || user?.displayName || ""}
@@ -76,7 +76,7 @@ const UserInfo = () => {
                 </p>
               </div>
 
-              {/* My Profile Link */}
+              {/* My profile link */}
               <li>
                 <Link href={"/profile"} className="flex items-center gap-3 py-3 px-3 text-zinc-700 font-medium hover:bg-base-200 rounded-xl">
                   <svg
@@ -91,7 +91,7 @@ const UserInfo = () => {
                 </Link>
               </li>
 
-              {/* Sign Out / Logout Link */}
+              {/* Sign out */}
               <li>
                 <a
                   onClick={handleSignOut}

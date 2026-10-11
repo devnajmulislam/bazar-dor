@@ -39,7 +39,7 @@ export default function NavLinks() {
       <div className="overflow-x-auto no-scrollbar">
         <div className="flex items-center justify-start gap-2 md:gap-3 min-w-max px-2">
           {loading ? (
-            // Skeleton loader while fetching categories
+            // loader for categories
             <div className="flex gap-3 py-1">
               {[1, 2, 3, 4, 5, 6].map((i) => (
                 <div

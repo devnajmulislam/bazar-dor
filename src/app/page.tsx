@@ -4,18 +4,19 @@ import ProductCard from "@/components/ProductCard";
 import { Product } from "@/types/product";
 
 export default async function Home() {
+  // get data
   const res = await fetch(
     "https://openapi.programming-hero.com/api/bazardor/products",
   );
   const data = await res.json();
 
-  // Top 6 Risers
+  // Top 6 risers
   const topRisers = [...data]
     .filter((item) => item.change.dir === "up")
     .sort((a, b) => b.change.pct - a.change.pct)
     .slice(0, 6);
 
-  // Top 6 Fallers
+  // Top 6 fallers
   const topFallers = [...data]
     .filter((item) => item.change.dir === "down")
     .sort((a, b) => a.change.pct - b.change.pct)
@@ -26,7 +27,7 @@ export default async function Home() {
       <Marquee />
       <Banner />
 
-      {/* আজ দাম বেড়েছে - Top 6 Risers */}
+      {/* Top 6 risers */}
       <div className="container mx-auto px-4">
         <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 flex items-center gap-2">
           <span className="text-[#D03739]">▲</span> আজ দাম বেড়েছে
@@ -38,7 +39,7 @@ export default async function Home() {
         </div>
       </div>
 
-      {/* আজ দাম কমেছে - Top 6 Fallers */}
+      {/*Top 6 fallers */}
       <div className="container mx-auto px-4">
         <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 flex items-center gap-2">
           <span className="text-[#009245]">▼</span> আজ দাম কমেছে
@@ -50,7 +51,7 @@ export default async function Home() {
         </div>
       </div>
 
-      {/* সব পণ্য - All Products */}
+      {/* All products */}
       <div className="container mx-auto px-4" id="সব-পণ্য">
         <div className="mb-4 md:mb-6">
           <h2 className="text-xl md:text-2xl font-bold">সব পণ্য</h2>

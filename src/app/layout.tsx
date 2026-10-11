@@ -32,6 +32,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
 
         {/* Footer */}
         <Footer/>
+        {/* Toaster */}
         <Toaster />
       </body>
     </html>

@@ -4,25 +4,25 @@ import ProductCard from "@/components/ProductCard";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
-import { Product } from "@/types/product"; // Import centralized Product interface
+import { Product } from "@/types/product";
 
 const CategoryProductPage = () => {
   const params = useParams();
   const categoryId = params?.categoryId;
 
-  const [data, setData] = useState<Product[]>([]); // Typed state
+  const [data, setData] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [sortOrder, setSortOrder] = useState("default");
 
   // Fetching data from API
   useEffect(() => {
     if (!categoryId) return;
-    
+
     const fetchProducts = async () => {
       setLoading(true);
       try {
         const res = await fetch(
-          `https://openapi.programming-hero.com/api/bazardor/products?category=${categoryId}`
+          `https://openapi.programming-hero.com/api/bazardor/products?category=${categoryId}`,
         );
         const result = await res.json();
         setData(result || []);
@@ -37,18 +37,29 @@ const CategoryProductPage = () => {
     fetchProducts();
   }, [categoryId]);
 
-  // Price parser function for Bengali/English digits and text
+  // Bengali/English digits and text
   const parsePrice = (priceValue: string | number) => {
     if (!priceValue) return 0;
     const str = String(priceValue);
-    
-    // Convert Bengali digits to English digits with proper record typing
-    const bengaliDigits: Record<string, string> = { 
-      '০': '0', '১': '1', '২': '2', '৩': '3', '৪': '4', 
-      '৫': '5', '৬': '6', '৭': '7', '৮': '8', '৯': '9' 
+
+    // Convert Bengali to English digits
+    const bengaliDigits: Record<string, string> = {
+      "০": "0",
+      "১": "1",
+      "২": "2",
+      "৩": "3",
+      "৪": "4",
+      "৫": "5",
+      "৬": "6",
+      "৭": "7",
+      "৮": "8",
+      "৯": "9",
     };
-    const converted = str.replace(/[০-৯]/g, (match) => bengaliDigits[match] || match);
-    
+    const converted = str.replace(
+      /[০-৯]/g,
+      (match) => bengaliDigits[match] || match,
+    );
+
     // Extract numbers (including decimals)
     const match = converted.match(/[\d.]+/);
     return match ? parseFloat(match[0]) : 0;
@@ -68,7 +79,9 @@ const CategoryProductPage = () => {
   if (!data || data.length === 0) {
     return (
       <div className="container mx-auto px-4 py-20 flex flex-col items-center justify-center text-center">
-        <h2 className="text-3xl font-bold mb-2 text-base-content">৪০৪ - কোনো পণ্য পাওয়া যায়নি</h2>
+        <h2 className="text-3xl font-bold mb-2 text-base-content">
+          ৪০৪ - কোনো পণ্য পাওয়া যায়নি
+        </h2>
         <p className="text-gray-500 mb-6">
           দুঃখিত, এই ক্যাটাগরিতে বর্তমানে কোনো পণ্য উপলব্ধ নেই।
         </p>
@@ -93,7 +106,7 @@ const CategoryProductPage = () => {
 
   return (
     <div className="container mx-auto px-4 py-6 max-w-7xl">
-      {/* 1. Top Header Card */}
+      {/* Top Header Card */}
       <div className="card bg-base-100 shadow-sm border border-base-200 mb-6">
         <div className="card-body flex flex-row items-center gap-4 py-6 px-6">
           <div className="text-4xl bg-base-200 p-4 rounded-2xl flex items-center justify-center">
@@ -110,7 +123,7 @@ const CategoryProductPage = () => {
         </div>
       </div>
 
-      {/* 2. Filter / Sort Section */}
+      {/* Filter / Sort Section */}
       <div className="card bg-base-100 shadow-sm border border-base-200 mb-6">
         <div className="card-body py-4 px-6 flex flex-row items-center justify-between">
           <div className="text-sm text-gray-600 hidden sm:block"></div>
@@ -129,12 +142,12 @@ const CategoryProductPage = () => {
         </div>
       </div>
 
-      {/* 3. Product Count Text */}
+      {/* Product Count Text */}
       <p className="text-sm text-gray-600 mb-4">
         মোট {sortedData.length}টি পণ্য দেখানো হচ্ছে
       </p>
 
-      {/* 4. Responsive Product Cards Grid */}
+      {/* Responsive Product Cards Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
         {sortedData.map((p) => (
           <ProductCard key={p.id} product={p} />

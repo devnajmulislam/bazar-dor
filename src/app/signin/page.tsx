@@ -36,12 +36,12 @@ const SignInPage = () => {
   //   });
   // };
 
-const handleGoogleSignIn = async () => {
+  const handleGoogleSignIn = async () => {
     try {
       toast.loading("Redirecting to Google...");
       const { error } = await authClient.signIn.social({
         provider: "google",
-        callbackURL: "/", // Redirects here after successful login
+        callbackURL: "/",
       });
 
       if (error) {
@@ -60,12 +60,12 @@ const handleGoogleSignIn = async () => {
   //   });
   // };
 
-const handleGitHubSignIn = async () => {
+  const handleGitHubSignIn = async () => {
     try {
       toast.loading("Redirecting to GitHub...");
       const { error } = await authClient.signIn.social({
         provider: "github",
-        callbackURL: "/", // Redirects here after successful login
+        callbackURL: "/",
       });
 
       if (error) {
@@ -80,7 +80,7 @@ const handleGitHubSignIn = async () => {
 
   return (
     <div className="min-h-screen bg-[#f3f7f4] flex flex-col items-center justify-center p-4 sm:p-6 md:p-8">
-      {/* Top Header & Subtitle */}
+      {/* Top header & subtitle */}
       <div className="text-center mb-6 sm:mb-8">
         <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-2">
           সাইন ইন
@@ -90,10 +90,10 @@ const handleGitHubSignIn = async () => {
         </p>
       </div>
 
-      {/* Card Container */}
+      {/* Card container */}
       <div className="w-full max-w-md bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sm:p-8">
         <form onSubmit={onSubmit} className="space-y-4 sm:space-y-5">
-          {/* Email Field */}
+          {/* Email field */}
           <div className="form-control">
             <label className="label">
               <span className="label-text font-medium text-gray-700">
@@ -103,12 +103,12 @@ const handleGitHubSignIn = async () => {
             <input
               name="email"
               type="email"
-              placeholder="you@example.com"
+              placeholder="nahid@gmail.com"
               className="input input-bordered w-full bg-gray-50/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-600"
             />
           </div>
 
-          {/* Password Field */}
+          {/* Password field */}
           <div className="form-control">
             <label className="label">
               <span className="label-text font-medium text-gray-700">
@@ -118,12 +118,12 @@ const handleGitHubSignIn = async () => {
             <input
               name="password"
               type="password"
-              placeholder="কমপক্ষে ৮ অক্ষর"
+              placeholder="Minimum 8 characters"
               className="input input-bordered w-full bg-gray-50/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-600"
             />
           </div>
 
-          {/* Submit Button */}
+          {/* Submit button */}
           <button
             type="submit"
             className="btn bg-[#12824c] hover:bg-[#0e683c] text-white w-full border-none shadow-md mt-2 text-base font-normal"
@@ -135,9 +135,9 @@ const handleGitHubSignIn = async () => {
         {/* Divider */}
         <div className="divider my-6 text-sm text-gray-400">অথবা</div>
 
-        {/* Social Login Buttons */}
+        {/* Social login buttons */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          {/* Google Button */}
+          {/* Google button */}
           <button
             type="button"
             onClick={handleGoogleSignIn}
@@ -164,7 +164,7 @@ const handleGitHubSignIn = async () => {
             <span className="text-sm">দিয়ে চালিয়ে যান</span>
           </button>
 
-          {/* GitHub Button */}
+          {/* GitHub button */}
           <button
             type="button"
             onClick={handleGitHubSignIn}
@@ -177,16 +177,19 @@ const handleGitHubSignIn = async () => {
           </button>
         </div>
 
-        {/* Sign Up Redirect */}
+        {/* Sign up redirect */}
         <div className="text-center mt-6 text-sm text-gray-600">
           অ্যাকাউন্ট নেই?{" "}
-          <a href="/signup" className="text-emerald-600 font-medium hover:underline">
+          <a
+            href="/signup"
+            className="text-emerald-600 font-medium hover:underline"
+          >
             সাইন আপ করুন
           </a>
         </div>
       </div>
 
-      {/* Bottom Back Link */}
+      {/* Bottom back link */}
       <div className="mt-6 text-center">
         <Link
           href="/"

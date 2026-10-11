@@ -25,5 +25,5 @@ export interface Product {
   lastMonth: number;
   change: PriceChange;
   markets: Market[];
-  [key: string]: any; // Allows dynamic indexing if needed
+  [key: string]: any;
 }

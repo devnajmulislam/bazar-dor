@@ -9,12 +9,12 @@ const Header = () => {
   });
 
   return (
-    // Main header container with responsive padding, background, and shadow for subtle depth
+    // container
     <div className="bg-base-100 shadow-sm sticky top-0 z-50">
       <div className="container mx-auto px-4 py-3 md:py-4 flex items-center justify-between">
-        {/* Left Section: Logo, Title, and Date */}
+        {/* Left content */}
         <div className="flex items-center gap-3">
-          {/* Logo with specific styling based on the image */}
+          {/* Logo */}
           <Link href={"/"}>
             {" "}
             <div className="bg-[#009245] p-2.5 rounded-2xl flex items-center justify-center shrink-0">
@@ -28,9 +28,9 @@ const Header = () => {
             </div>
           </Link>
 
-          {/* Title and Dynamic Date (visible on all screens) */}
+          {/* Title & dynamic date */}
           <div className="flex flex-col">
-            <h1 className="text-[#1A2E35] text-xl md:text-2xl font-extrabold leading-tight">
+            <h1 className="text-[#1A2E35] text-xl md:text-2xl font-extrabold ">
               বাজার দর
             </h1>
             <p className="text-[#64748B] text-xs md:text-sm font-medium mt-0.5">
@@ -39,9 +39,10 @@ const Header = () => {
           </div>
         </div>
 
-        {/* Right Section: Auth Buttons with responsive hiding/display */}
+        {/* Right content component */}
         <UserInfo />
       </div>
+      {/* Category links component */}
       <NavLinks />
     </div>
   );

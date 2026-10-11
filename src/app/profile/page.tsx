@@ -11,7 +11,10 @@ const ProfilePage = () => {
   const handleUpdateProfile = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    const newUserData = Object.fromEntries(formData.entries()) as { name: string; image: string };
+    const newUserData = Object.fromEntries(formData.entries()) as {
+      name: string;
+      image: string;
+    };
 
     toast.success("Name update successfull!");
 
@@ -28,7 +31,7 @@ const ProfilePage = () => {
   return (
     <div className="min-h-screen bg-base-200 py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto space-y-6">
-        {/* Header Section */}
+        {/* Header section */}
         <div>
           <h1 className="text-2xl sm:text-3xl font-bold text-neutral">
             আমার প্রোফাইল
@@ -38,7 +41,7 @@ const ProfilePage = () => {
           </p>
         </div>
 
-        {/* User Info Card */}
+        {/* User info card */}
         <div className="card bg-base-100 shadow-sm border border-base-200">
           <div className="card-body p-4 sm:p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
@@ -68,8 +71,11 @@ const ProfilePage = () => {
               </div>
             </div>
 
-            {/* Sign Out Button */}
-            <button onClick={handleSignOut} className="btn btn-outline btn-error text-error hover:bg-error hover:text-white w-full sm:w-auto px-6">
+            {/* Sign out button */}
+            <button
+              onClick={handleSignOut}
+              className="btn btn-outline btn-error text-error hover:bg-error hover:text-white w-full sm:w-auto px-6"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5 rotate-180"
@@ -89,7 +95,7 @@ const ProfilePage = () => {
           </div>
         </div>
 
-        {/* Info / Update Form Section */}
+        {/* Update info section */}
         <div className="card bg-base-100 shadow-sm border border-base-200">
           <div className="card-body p-4 sm:p-8">
             <h3 className="text-lg sm:text-xl font-bold text-neutral mb-4">
@@ -107,12 +113,12 @@ const ProfilePage = () => {
                   name="name"
                   type="text"
                   defaultValue={user?.name || ""}
-                  placeholder="আপনার নাম লিখুন"
+                  placeholder="Nahid Bhai"
                   className="input input-bordered w-full bg-base-100 focus:outline-none"
                 />
               </div>
 
-              {/* Update Button */}
+              {/* Update button */}
               <button
                 type="submit"
                 className="btn bg-[#008236] hover:bg-[#006b2d] text-white w-full text-base font-medium border-none shadow-md"

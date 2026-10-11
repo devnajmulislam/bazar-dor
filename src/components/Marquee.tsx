@@ -75,48 +75,43 @@ const Marquee = async () => {
               }
 
               return (
-                <>
-                  <Link href={`/product/${product.id}`}>
-                    <div
-                      key={product.id}
-                      className="flex items-center gap-2 px-4 py-1 border-r border-base-200 whitespace-nowrap text-sm sm:text-base"
-                    >
-                      {/* Category Emoji Icon */}
-                      <span className="text-lg select-none">
-                        {product.categoryIcon}
+                <Link href={`/product/${product.id}`} key={product.id}>
+                  <div className="flex items-center gap-2 px-4 py-1 border-r border-base-200 whitespace-nowrap text-sm sm:text-base">
+                    {/* Category emoji icon */}
+                    <span className="text-lg select-none">
+                      {product.categoryIcon}
+                    </span>
+
+                    {/* Product name */}
+                    <span className="font-semibold text-base-content">
+                      {product.nameBn}
+                    </span>
+
+                    {/* Price & unit display */}
+                    <div className="flex items-center gap-1 text-base-content/80 font-medium">
+                      <span className="font-bold text-base-content">
+                        {toBengaliNumber(product.today)}
                       </span>
-
-                      {/* Product Name (Bangla) */}
-                      <span className="font-semibold text-base-content">
-                        {product.nameBn}
+                      <span className="text-xs opacity-75">টাকা/</span>
+                      <span className="text-xs opacity-75">
+                        {translateUnitToBengali(product.unit)}
                       </span>
-
-                      {/* Price & Unit Display (e.g. ১৪৮ টাকা/কেজি) */}
-                      <div className="flex items-center gap-1 text-base-content/80 font-medium">
-                        <span className="font-bold text-base-content">
-                          {toBengaliNumber(product.today)}
-                        </span>
-                        <span className="text-xs opacity-75">টাকা/</span>
-                        <span className="text-xs opacity-75">
-                          {translateUnitToBengali(product.unit)}
-                        </span>
-                      </div>
-
-                      {/* Change Percentage Badge */}
-                      <div
-                        className={`flex items-center gap-0.5 font-bold text-xs sm:text-sm px-1.5 py-0.5 rounded bg-base-200/50 ${changeColor}`}
-                      >
-                        <span>{Arrow}</span>
-                        <span>
-                          {toBengaliNumber(
-                            Math.abs(product.change.pct).toFixed(1),
-                          )}
-                          %
-                        </span>
-                      </div>
                     </div>
-                  </Link>
-                </>
+
+                    {/* Change percentage badge */}
+                    <div
+                      className={`flex items-center gap-0.5 font-bold text-xs sm:text-sm px-1.5 py-0.5 rounded bg-base-200/50 ${changeColor}`}
+                    >
+                      <span>{Arrow}</span>
+                      <span>
+                        {toBengaliNumber(
+                          Math.abs(product.change.pct).toFixed(1),
+                        )}
+                        %
+                      </span>
+                    </div>
+                  </div>
+                </Link>
               );
             })}
           </div>
