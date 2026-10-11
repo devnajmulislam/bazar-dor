@@ -72,7 +72,7 @@ const CategoryProductPage = () => {
         <p className="text-gray-500 mb-6">
           দুঃখিত, এই ক্যাটাগরিতে বর্তমানে কোনো পণ্য উপলব্ধ নেই।
         </p>
-        <Link href="/" className="btn btn-primary">
+        <Link href="/" className="btn bg-[#009245] text-white">
           হোম পেজে ফিরে যান
         </Link>
       </div>

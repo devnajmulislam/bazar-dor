@@ -30,16 +30,52 @@ const SignInPage = () => {
     }
   };
 
-  const handleGoogleSignIn = async () => {
-    await authClient.signIn.social({
-      provider: "google",
-    });
+  // const handleGoogleSignIn = async () => {
+  //   await authClient.signIn.social({
+  //     provider: "google",
+  //   });
+  // };
+
+const handleGoogleSignIn = async () => {
+    try {
+      toast.loading("Redirecting to Google...");
+      const { error } = await authClient.signIn.social({
+        provider: "google",
+        callbackURL: "/", // Redirects here after successful login
+      });
+
+      if (error) {
+        toast.dismiss();
+        toast.error(error.message || "Failed to sign in with Google");
+      }
+    } catch (err) {
+      toast.dismiss();
+      toast.error("Something went wrong with Google sign in");
+    }
   };
 
-  const handleGitHubSignIn = async () => {
-    await authClient.signIn.social({
-      provider: "github",
-    });
+  // const handleGitHubSignIn = async () => {
+  //   await authClient.signIn.social({
+  //     provider: "github",
+  //   });
+  // };
+
+const handleGitHubSignIn = async () => {
+    try {
+      toast.loading("Redirecting to GitHub...");
+      const { error } = await authClient.signIn.social({
+        provider: "github",
+        callbackURL: "/", // Redirects here after successful login
+      });
+
+      if (error) {
+        toast.dismiss();
+        toast.error(error.message || "Failed to sign in with GitHub");
+      }
+    } catch (err) {
+      toast.dismiss();
+      toast.error("Something went wrong with GitHub sign in");
+    }
   };
 
   return (
